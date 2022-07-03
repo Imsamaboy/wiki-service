@@ -26,7 +26,7 @@ public class ErrorHandlingControllerAdvice {
 
     @ExceptionHandler(ArticleNotFoundException.class)
     public ResponseEntity<Void> handleArticleNotFoundException(ArticleNotFoundException ex) {
-        log.error("ArticleNotFoundException exceptionЖ " + ex.getMessage() + " article not found");
+        log.error("ArticleNotFoundException exception: " + ex.getMessage() + " article not found");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 }

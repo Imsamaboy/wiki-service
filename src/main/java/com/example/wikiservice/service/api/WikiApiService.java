@@ -10,6 +10,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Map;
 
@@ -55,5 +56,12 @@ public class WikiApiService {
         Map<String, Integer> result = service.handleGetRequestStatistics();
         log.info("Successfully got category statistics");
         return result;
+    }
+
+    public ModelAndView getHtmlArticleByNameValue(String name) throws ArticleNotFoundException {
+        log.info("Trying to get html view for article {}", name);
+        ModelAndView modelAndView = service.handleGetRequestHtmlArticleByName(name);
+        log.info("Successfully got html view for article {}", name);
+        return modelAndView;
     }
 }

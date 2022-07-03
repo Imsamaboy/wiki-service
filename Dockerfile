@@ -53,7 +53,9 @@ FROM openjdk:17-jdk-alpine
 #COPY target/*.jar app.jar
 
 ARG JAR_FILE=./target/*.jar
+
 COPY ${JAR_FILE} application.jar
+
 ENTRYPOINT ["java", "-jar", "application.jar"]
 
 #RUN "sudo chmod 777 app.jar"

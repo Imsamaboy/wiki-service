@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.transaction.Transactional;
 import java.time.LocalDateTime;
@@ -127,5 +128,18 @@ public class WikiService {
                 .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
 
         return reverseSortedMap;
+    }
+
+    public ModelAndView handleGetRequestHtmlArticleByName(String name) throws ArticleNotFoundException {
+        Article article = articleRepository.findArticleByNameCaseInsensitive(name).orElseThrow(ArticleNotFoundException::new);
+        ModelAndView modelAndView = new ModelAndView("article");
+        modelAndView.addObject("title", article.getTitle())
+                .addObject("wiki", article.getWiki())
+                .addObject("language", article.getLanguage())
+                .addObject("content", article.getAuxiliaryText())
+                .addObject("categories", article.getCategories())
+                .addObject("created", article.getCreateTimeStamp())
+                .addObject("lastUpdate", article.getTimeStamp());
+        return modelAndView;
     }
 }

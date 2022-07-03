@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.Map;
@@ -113,7 +114,9 @@ public class WikiServiceController {
         return apiService.getCategoryStatistics();
     }
 
-    public void getHtmlViewForArticle() {
-
+    // TODO: In development
+    @GetMapping(value = "/{name}/html")
+    public ModelAndView getHtmlViewForArticle(@PathVariable String name) throws ArticleNotFoundException {
+        return apiService.getHtmlArticleByNameValue(name);
     }
 }

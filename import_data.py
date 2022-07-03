@@ -34,7 +34,7 @@ class Article(db.Entity):
     auxiliary_text = Set(AuxiliaryText)
 
 
-db.bind(provider='postgres', user='postgres', password='root', host='localhost', database='postgres', port="5433")
+db.bind(provider='postgres', user='postgres', password='root', host='db', database='postgres', port="5432")
 db.generate_mapping(create_tables=True)
 
 
